@@ -1,28 +1,19 @@
+import 'package:article_idea_generator/home/notifiers/home_notifier.dart';
 import 'package:article_idea_generator/home/widgets/app_check_box.dart';
 import 'package:article_idea_generator/home/widgets/app_text_field.dart';
 import 'package:article_idea_generator/home/widgets/send_button.dart';
 import 'package:article_idea_generator/home/widgets/theme_switcher.dart';
 import 'package:article_idea_generator/shared/constants/app_texts.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends ConsumerWidget {
   const HomePage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    final homeState = ref.watch(homeNotifierProvider);
 
-class _HomePageState extends State<HomePage> {
-  late final _clickbaitFeatureEnabled = ValueNotifier<bool?>(false);
-
-  @override
-  void dispose() {
-    _clickbaitFeatureEnabled.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
@@ -44,13 +35,11 @@ class _HomePageState extends State<HomePage> {
               const SizedBox(height: 16.0),
               Row(
                 children: [
-                  ValueListenableBuilder(
-                    valueListenable: _clickbaitFeatureEnabled,
-                    builder: (context, value, __) => AppCheckBox(
-                      value: value,
-                      onChanged: (newValue) =>
-                          _clickbaitFeatureEnabled.value = newValue,
-                    ),
+                  AppCheckBox(
+                    value: homeState.clickbaitFeatureEnabled,
+                    onChanged: (value) => ref
+                        .watch(homeNotifierProvider.notifier)
+                        .toggleClickbaitFeature(value),
                   ),
                   const Text('Enable SEO & Clickbait Feature'),
                 ],
