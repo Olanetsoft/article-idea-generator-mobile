@@ -1,0 +1,13 @@
+{
+  "java.configuration.updateBuildConfiguration": "disabled",
+  "cSpell.words": [
+    "developerjamiu",
+    "Grotesk",
+    "Olanetsoft",
+  ],
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true,
+    "editor.formatOnSave": true,
+    "editor.bracketPairColorization.enabled": true
+  }
+}
