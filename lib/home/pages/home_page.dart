@@ -1,6 +1,7 @@
 import 'package:article_idea_generator/home/widgets/app_check_box.dart';
 import 'package:article_idea_generator/home/widgets/app_text_field.dart';
 import 'package:article_idea_generator/home/widgets/send_button.dart';
+import 'package:article_idea_generator/home/widgets/theme_switcher.dart';
 import 'package:article_idea_generator/shared/constants/app_texts.dart';
 import 'package:flutter/material.dart';
 
@@ -26,6 +27,7 @@ class _HomePageState extends State<HomePage> {
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
         appBar: AppBar(
+          leading: const ThemeSwitcher(),
           title: const Text(AppTexts.title),
         ),
         body: Padding(

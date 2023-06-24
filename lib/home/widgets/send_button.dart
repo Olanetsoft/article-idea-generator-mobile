@@ -15,7 +15,7 @@ class SendButton extends StatelessWidget {
         child: CircleAvatar(
           radius: 19,
           backgroundColor: colorScheme.primary,
-          child: Icon(Icons.arrow_forward, color: colorScheme.background),
+          child: Icon(Icons.arrow_forward, color: colorScheme.onPrimary),
         ),
       ),
     );
