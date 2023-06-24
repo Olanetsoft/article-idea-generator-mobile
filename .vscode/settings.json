@@ -4,6 +4,7 @@
     "developerjamiu",
     "Grotesk",
     "Olanetsoft",
+    "unfocus",
   ],
   "editor.codeActionsOnSave": {
     "source.fixAll": true,

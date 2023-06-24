@@ -1,4 +1,4 @@
-import 'package:article_idea_generator/pages/home_page.dart';
+import 'package:article_idea_generator/home/pages/home_page.dart';
 import 'package:article_idea_generator/shared/constants/app_texts.dart';
 import 'package:article_idea_generator/shared/theme/app_theme.dart';
 import 'package:flutter/material.dart';
