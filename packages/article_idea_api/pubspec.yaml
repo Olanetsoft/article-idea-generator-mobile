@@ -1,0 +1,13 @@
+name: article_idea_api
+description: The interface and models for an API providing access to article ideas.
+version: 0.0.1
+publish_to: none
+
+environment:
+  sdk: ">=2.19.6 <3.0.0"
+
+dependencies:
+  equatable: ^2.0.5
+
+dev_dependencies:
+  test: ^1.24.3
