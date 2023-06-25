@@ -3,16 +3,22 @@ description: The mobile version of the Article Idea Generator by Olanetsoft.
 
 publish_to: "none"
 
-version: 1.0.0+1
+version: 0.0.1
 
 environment:
   sdk: ">=2.19.6 <3.0.0"
 
 dependencies:
+  article_idea_api:
+    path: packages/article_idea_api
+  article_idea_repository:
+    path: packages/article_idea_repository
+  equatable: ^2.0.5
   flutter:
     sdk: flutter
   flutter_riverpod: ^2.3.6
   google_fonts: ^4.0.0
+  shimmer: ^3.0.0
 
 dev_dependencies:
   flutter_test:

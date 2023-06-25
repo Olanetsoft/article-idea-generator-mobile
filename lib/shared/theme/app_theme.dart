@@ -19,8 +19,10 @@ abstract class AppTheme {
     primary: AppColors.primary,
     secondary: AppColors.primaryLight,
     onPrimary: AppColors.white,
-    background: AppColors.white,
+    background: AppColors.backGround,
     onBackground: AppColors.black,
+    surface: AppColors.surface,
+    surfaceTint: AppColors.surfaceTint,
   );
 
   static final ColorScheme _darkColorScheme = const ColorScheme.dark().copyWith(
@@ -29,6 +31,8 @@ abstract class AppTheme {
     onPrimary: AppColors.white,
     background: AppColors.darkBackground,
     onBackground: AppColors.white,
+    surface: AppColors.darkSurface,
+    surfaceTint: AppColors.surfaceTintDark,
   );
 
   static final TextTheme _spaceGrotesk = GoogleFonts.spaceGroteskTextTheme();
