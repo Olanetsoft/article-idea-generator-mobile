@@ -1,7 +1,7 @@
-import 'package:article_idea_generator/home/pages/home_page.dart';
-import 'package:article_idea_generator/shared/constants/app_texts.dart';
-import 'package:article_idea_generator/shared/notifiers/theme_notifier.dart';
-import 'package:article_idea_generator/shared/theme/app_theme.dart';
+import 'package:article_idea_generator/core/constants/app_texts.dart';
+import 'package:article_idea_generator/features/article_ideas/presentation/pages/article_ideas_page.dart';
+import 'package:article_idea_generator/features/shared/presentation/notifiers/theme_notifier.dart';
+import 'package:article_idea_generator/core/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -15,7 +15,7 @@ class ArticleIdeaGenerator extends ConsumerWidget {
     return MaterialApp(
       title: AppTexts.title,
       debugShowCheckedModeBanner: false,
-      home: const HomePage(),
+      home: const ArticleIdeasPage(),
       theme: AppTheme.light,
       darkTheme: AppTheme.dark,
       themeMode: ThemeMode.values[themeState.index],

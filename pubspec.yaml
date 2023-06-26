@@ -9,10 +9,7 @@ environment:
   sdk: ">=2.19.6 <3.0.0"
 
 dependencies:
-  article_idea_api:
-    path: packages/article_idea_api
-  article_idea_repository:
-    path: packages/article_idea_repository
+  dio: ^5.2.1+1
   equatable: ^2.0.5
   flutter:
     sdk: flutter
@@ -25,6 +22,7 @@ dev_dependencies:
     sdk: flutter
 
   flutter_lints: ^2.0.0
+  mocktail: ^0.3.0
 
 flutter:
   uses-material-design: true
