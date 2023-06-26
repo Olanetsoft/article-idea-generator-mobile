@@ -17,8 +17,8 @@ class ArticleIdeasPage extends ConsumerWidget {
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
         appBar: AppBar(
-          leading: const ThemeSwitcher(),
           title: const Text(AppTexts.title),
+          actions: const [ThemeSwitcher()],
         ),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24.0),
@@ -34,16 +34,30 @@ class ArticleIdeasPage extends ConsumerWidget {
                     .onTextChanged,
                 suffixIcon: SendButton(
                   busy: articleIdeasState.viewState == ViewState.loading,
-                  onTap: ref
-                      .watch(articleIdeasNotifierProvider.notifier)
-                      .fetchArticleIdeas,
+                  onTap: () {
+                    if (articleIdeasState.query == null ||
+                        articleIdeasState.query!.isEmpty) {
+                      ScaffoldMessenger.of(context)
+                        ..hideCurrentSnackBar()
+                        ..showSnackBar(
+                          const SnackBar(
+                            behavior: SnackBarBehavior.floating,
+                            content: Text('Input what\'s on your mind'),
+                          ),
+                        );
+                    } else {
+                      ref
+                          .watch(articleIdeasNotifierProvider.notifier)
+                          .fetchArticleIdeas();
+                    }
+                  },
                 ),
               ),
               const SizedBox(height: 16.0),
               Row(
                 children: [
                   AppCheckBox(
-                    value: articleIdeasState.clickbaitFeatureEnabled,
+                    value: articleIdeasState.seoEnabled,
                     onChanged: (value) => ref
                         .watch(articleIdeasNotifierProvider.notifier)
                         .toggleClickbaitFeature(value),
@@ -61,7 +75,11 @@ class ArticleIdeasPage extends ConsumerWidget {
                   child: ArticleIdeasListView(
                     articleIdeas: articleIdeasState.articleIdeas!,
                   ),
-                ),
+                )
+              else if (articleIdeasState.failure != null)
+                Expanded(
+                  child: Text(articleIdeasState.failure!.message),
+                )
             ],
           ),
         ),
