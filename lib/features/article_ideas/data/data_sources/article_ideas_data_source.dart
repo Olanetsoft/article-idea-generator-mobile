@@ -1,37 +1,56 @@
+import 'package:article_idea_generator/core/utilities/exceptions.dart';
 import 'package:article_idea_generator/features/article_ideas/data/models/article_idea.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 abstract class ArticleIdeasDataSource {
-  Future<List<ArticleIdea>> getArticleIdeas({required String query});
+  Future<List<ArticleIdea>> getArticleIdeas({
+    required String query,
+    bool seoEnabled,
+  });
 }
 
-class FakeArticleIdeasDataSource implements ArticleIdeasDataSource {
-  @override
-  Future<List<ArticleIdea>> getArticleIdeas({required String query}) async {
-    await Future.delayed(const Duration(seconds: 2));
+class DioArticleIdeasDataSource implements ArticleIdeasDataSource {
+  DioArticleIdeasDataSource({
+    required Dio dio,
+  }) : _dio = dio;
 
-    return const <ArticleIdea>[
-      ArticleIdea(
-        id: '1',
-        title:
-            'A Look Into the Future of Programming: Emerging Technologies and Trends',
-      ),
-      ArticleIdea(
-        id: '2',
-        title: 'How to Learn Programming from Scratch: A Beginner\'s Guide',
-      ),
-      ArticleIdea(
-        id: '3',
-        title: 'The Advantages of Learning Python for Programming',
-      ),
-      ArticleIdea(
-        id: '4',
-        title: 'Top Programming Languages to Master in 2021',
-      ),
-    ];
+  final Dio _dio;
+
+  @override
+  Future<List<ArticleIdea>> getArticleIdeas({
+    required String query,
+    bool seoEnabled = false,
+  }) async {
+    try {
+      final response = await _dio.get(
+        'https://www.articleideagenerator.com/api/request?seoEnabled=$seoEnabled',
+        data: {
+          'prompt': query,
+        },
+      );
+
+      final List<String> splitResult =
+          (response.data['result'] as String).split('\n');
+
+      final articleIdeas =
+          splitResult.map((result) => ArticleIdea(title: result)).toList();
+
+      return articleIdeas;
+    } on DioException catch (ex) {
+      if (ex.response != null) {
+        throw ServerException(ex.response?.data['error']);
+      } else {
+        throw ServerException(ex.message ?? '');
+      }
+    } catch (ex) {
+      throw const ServerException('Something went wrong');
+    }
   }
 }
 
 final articleIdeasDataSourceProvider = Provider<ArticleIdeasDataSource>(
-  (ref) => FakeArticleIdeasDataSource(),
+  (ref) => DioArticleIdeasDataSource(
+    dio: Dio(),
+  ),
 );

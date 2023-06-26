@@ -3,13 +3,12 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('ArticleIdea', () {
-    const id = 'mock-id';
     const title = 'mock-title';
 
     test('uses value equality', () {
       expect(
-        const ArticleIdea(id: id, title: title),
-        equals(const ArticleIdea(id: id, title: title)),
+        const ArticleIdea(title: title),
+        equals(const ArticleIdea(title: title)),
       );
     });
   });

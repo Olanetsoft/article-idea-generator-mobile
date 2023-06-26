@@ -9,9 +9,9 @@ class MockArticleIdeasDataSource extends Mock
     implements ArticleIdeasDataSource {}
 
 const articleIdeas = [
-  ArticleIdea(id: '1', title: 'title 1'),
-  ArticleIdea(id: '2', title: 'title 2'),
-  ArticleIdea(id: '3', title: 'title 3'),
+  ArticleIdea(title: 'title 1'),
+  ArticleIdea(title: 'title 2'),
+  ArticleIdea(title: 'title 3'),
 ];
 
 void main() {

@@ -4,7 +4,10 @@ import 'package:article_idea_generator/features/article_ideas/data/repositories/
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 abstract class ArticleIdeasRepository {
-  Future<List<ArticleIdea>> getArticleIdeas({required String query});
+  Future<List<ArticleIdea>> getArticleIdeas({
+    required String query,
+    bool seoEnabled,
+  });
 }
 
 final articleIdeasRepositoryProvider = Provider<ArticleIdeasRepository>(

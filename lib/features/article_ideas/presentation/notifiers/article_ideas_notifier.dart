@@ -1,3 +1,4 @@
+import 'package:article_idea_generator/core/utilities/failure.dart';
 import 'package:article_idea_generator/features/article_ideas/domain/repositories/article_ideas_repository.dart';
 import 'package:article_idea_generator/features/article_ideas/presentation/states/article_ideas_state.dart';
 import 'package:article_idea_generator/core/utilities/view_state.dart';
@@ -15,19 +16,32 @@ class ArticleIdeasNotifier extends StateNotifier<ArticleIdeasState> {
   }
 
   void toggleClickbaitFeature(bool? newValue) {
-    state = state.copyWith(clickbaitFeatureEnabled: newValue);
+    state = state.copyWith(
+      seoEnabled: newValue,
+    );
+
+    fetchArticleIdeas();
   }
 
   void fetchArticleIdeas() async {
-    state = state.copyWith(viewState: ViewState.loading);
+    try {
+      state = state.copyWith(viewState: ViewState.loading);
 
-    final articleIdeas =
-        await articleIdeaRepository.getArticleIdeas(query: state.query ?? '');
+      final articleIdeas = await articleIdeaRepository.getArticleIdeas(
+        query: state.query ?? '',
+        seoEnabled: state.seoEnabled,
+      );
 
-    state = state.copyWith(
-      viewState: ViewState.idle,
-      articleIdeas: articleIdeas,
-    );
+      state = state.copyWith(
+        viewState: ViewState.idle,
+        articleIdeas: articleIdeas,
+      );
+    } on Failure catch (failure) {
+      state = state.copyWith(
+        viewState: ViewState.idle,
+        failure: failure,
+      );
+    }
   }
 }
 

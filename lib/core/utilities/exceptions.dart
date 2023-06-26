@@ -1,9 +1,9 @@
 import 'package:equatable/equatable.dart';
 
-class Failure extends Equatable {
-  final String message;
+class ServerException extends Equatable implements Exception {
+  const ServerException(this.message);
 
-  const Failure(this.message);
+  final String message;
 
   @override
   String toString() => message;

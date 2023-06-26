@@ -4,29 +4,31 @@ import 'package:article_idea_generator/features/article_ideas/data/models/articl
 
 class ArticleIdeasState {
   const ArticleIdeasState({
-    this.clickbaitFeatureEnabled = false,
+    this.seoEnabled = false,
     this.viewState = ViewState.idle,
     this.articleIdeas,
     this.query,
+    this.failure,
   });
 
-  final bool? clickbaitFeatureEnabled;
+  final bool seoEnabled;
   final List<ArticleIdea>? articleIdeas;
   final ViewState viewState;
   final String? query;
+  final Failure? failure;
 
   ArticleIdeasState copyWith({
-    bool? clickbaitFeatureEnabled,
+    bool? seoEnabled,
     List<ArticleIdea>? articleIdeas,
     ViewState? viewState,
     String? query,
     Failure? failure,
   }) =>
       ArticleIdeasState(
-        clickbaitFeatureEnabled:
-            clickbaitFeatureEnabled ?? this.clickbaitFeatureEnabled,
+        seoEnabled: seoEnabled ?? this.seoEnabled,
         articleIdeas: articleIdeas ?? this.articleIdeas,
         viewState: viewState ?? this.viewState,
         query: query ?? this.query,
+        failure: failure ?? this.failure,
       );
 }
