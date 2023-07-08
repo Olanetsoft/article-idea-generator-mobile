@@ -13,8 +13,6 @@ class ArticleIdeaItem extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final colorScheme = Theme.of(context).colorScheme;
-
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 16.0),
       child: Row(
@@ -23,37 +21,22 @@ class ArticleIdeaItem extends ConsumerWidget {
             child: Text(articleIdea.title),
           ),
           const SizedBox(width: 16),
-          CircleAvatar(
-            backgroundColor: colorScheme.onBackground.withOpacity(0.8),
-            child: IconButton(
-              color: colorScheme.background,
-              onPressed: () {
-                ref
-                    .read(articleIdeasNotifierProvider.notifier)
-                    .copyArticleIdea(articleIdea);
-
-                ScaffoldMessenger.of(context)
-                  ..hideCurrentSnackBar()
-                  ..showSnackBar(
-                    const SnackBar(
-                      behavior: SnackBarBehavior.floating,
-                      content: Text('Title copied to clipboard'),
-                    ),
-                  );
-              },
-              icon: const Icon(Icons.copy),
-            ),
-          ),
-          const SizedBox(width: 8),
-          CircleAvatar(
-            backgroundColor: colorScheme.onBackground.withOpacity(0.8),
-            child: IconButton(
-              color: colorScheme.background,
-              onPressed: () => ref
+          IconButton(
+            onPressed: () {
+              ref
                   .read(articleIdeasNotifierProvider.notifier)
-                  .shareArticleIdea(articleIdea),
-              icon: const Icon(Icons.share),
-            ),
+                  .copyArticleIdea(articleIdea);
+
+              ScaffoldMessenger.of(context)
+                ..hideCurrentSnackBar()
+                ..showSnackBar(
+                  const SnackBar(
+                    behavior: SnackBarBehavior.floating,
+                    content: Text('Title copied to clipboard'),
+                  ),
+                );
+            },
+            icon: const Icon(Icons.copy, size: 16),
           ),
         ],
       ),

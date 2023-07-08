@@ -1,8 +1,12 @@
+import 'dart:math';
+
+import 'package:article_idea_generator/core/constants/app_texts.dart';
 import 'package:article_idea_generator/core/utilities/failure.dart';
 import 'package:article_idea_generator/features/article_ideas/data/models/article_idea.dart';
 import 'package:article_idea_generator/features/article_ideas/domain/repositories/article_ideas_repository.dart';
 import 'package:article_idea_generator/features/article_ideas/presentation/states/article_ideas_state.dart';
 import 'package:article_idea_generator/core/utilities/view_state.dart';
+import 'package:article_idea_generator/features/shared/domain/repositories/social_share_repository.dart';
 import 'package:article_idea_generator/features/shared/domain/repositories/text_data_exchange_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -10,10 +14,12 @@ class ArticleIdeasNotifier extends StateNotifier<ArticleIdeasState> {
   ArticleIdeasNotifier({
     required this.articleIdeaRepository,
     required this.textDataExchangeRepository,
+    required this.socialShareRepository,
   }) : super(const ArticleIdeasState());
 
   final ArticleIdeasRepository articleIdeaRepository;
   final TextDataExchangeRepository textDataExchangeRepository;
+  final SocialShareRepository socialShareRepository;
 
   void toggleClickbaitFeature(bool? newValue) {
     state = state.copyWith(
@@ -51,6 +57,16 @@ class ArticleIdeasNotifier extends StateNotifier<ArticleIdeasState> {
   void copyArticleIdea(ArticleIdea articleIdea) {
     textDataExchangeRepository.copyText(articleIdea.title);
   }
+
+  void shareArticleIdeaOnTwitter() {
+    final randomIndex = Random().nextInt(AppTexts.marketingTweets.length);
+
+    socialShareRepository.shareTwitter(
+      AppTexts.marketingTweets[randomIndex],
+      hashtags: ['ArticleIdeaGenerator'],
+      url: 'https://www.articleideagenerator.com',
+    );
+  }
 }
 
 final articleIdeasNotifierProvider =
@@ -58,5 +74,6 @@ final articleIdeasNotifierProvider =
   (ref) => ArticleIdeasNotifier(
     articleIdeaRepository: ref.read(articleIdeasRepositoryProvider),
     textDataExchangeRepository: ref.read(textDataExchangeRepositoryProvider),
+    socialShareRepository: ref.read(socialShareRepositoryProvider),
   ),
 );
