@@ -1,8 +1,8 @@
 import 'package:article_idea_generator/features/article_ideas/data/models/article_idea.dart';
+import 'package:article_idea_generator/features/article_ideas/presentation/widgets/article_idea_item.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class ArticleIdeasListView extends ConsumerWidget {
+class ArticleIdeasListView extends StatelessWidget {
   const ArticleIdeasListView({
     super.key,
     required this.articleIdeas,
@@ -11,22 +11,12 @@ class ArticleIdeasListView extends ConsumerWidget {
   final List<ArticleIdea> articleIdeas;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final colorScheme = Theme.of(context).colorScheme;
-
-    return ListView.builder(
+  Widget build(BuildContext context) {
+    return ListView.separated(
+      separatorBuilder: (context, index) => const Divider(),
       itemCount: articleIdeas.length,
-      itemBuilder: (context, index) => Container(
-        decoration: BoxDecoration(
-          border: Border.all(color: colorScheme.surfaceTint),
-          borderRadius: BorderRadius.circular(8.0),
-          color: colorScheme.surface,
-        ),
-        padding: const EdgeInsets.all(8.0),
-        margin: const EdgeInsets.all(8.0),
-        child: Text(
-          articleIdeas[index].title,
-        ),
+      itemBuilder: (context, index) => ArticleIdeaItem(
+        articleIdea: articleIdeas[index],
       ),
     );
   }

@@ -56,7 +56,7 @@ abstract class AppTheme {
       );
 
   static IconThemeData _iconThemeData(ColorScheme colorScheme) => IconThemeData(
-        color: colorScheme.onPrimary,
+        color: colorScheme.onBackground,
       );
 
   static InputDecorationTheme _inputDecorationTheme(ColorScheme colorScheme) =>

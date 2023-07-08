@@ -16,6 +16,7 @@ dependencies:
   flutter_riverpod: ^2.3.6
   google_fonts: ^4.0.0
   get_storage: ^2.1.1
+  share_plus: ^7.0.2
   shimmer: ^3.0.0
 
 dev_dependencies:
