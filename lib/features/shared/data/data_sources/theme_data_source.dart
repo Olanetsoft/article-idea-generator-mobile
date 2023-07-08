@@ -11,8 +11,8 @@ abstract class ThemeDataSource {
   Future<void> setThemeState(ThemeState state);
 }
 
-class HiveThemeDataSource implements ThemeDataSource {
-  HiveThemeDataSource({
+class GetStorageThemeDataSource implements ThemeDataSource {
+  GetStorageThemeDataSource({
     required GetStorage storage,
   }) : _storage = storage;
 
@@ -32,5 +32,5 @@ class HiveThemeDataSource implements ThemeDataSource {
 }
 
 final themeDataSourceProvider = Provider<ThemeDataSource>(
-  (ref) => HiveThemeDataSource(storage: GetStorage()),
+  (ref) => GetStorageThemeDataSource(storage: GetStorage()),
 );
