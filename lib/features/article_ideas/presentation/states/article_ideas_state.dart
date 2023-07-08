@@ -7,14 +7,12 @@ class ArticleIdeasState {
     this.seoEnabled = false,
     this.viewState = ViewState.idle,
     this.articleIdeas,
-    this.query,
     this.failure,
   });
 
   final bool seoEnabled;
   final List<ArticleIdea>? articleIdeas;
   final ViewState viewState;
-  final String? query;
   final Failure? failure;
 
   ArticleIdeasState copyWith({
@@ -28,7 +26,6 @@ class ArticleIdeasState {
         seoEnabled: seoEnabled ?? this.seoEnabled,
         articleIdeas: articleIdeas ?? this.articleIdeas,
         viewState: viewState ?? this.viewState,
-        query: query ?? this.query,
         failure: failure ?? this.failure,
       );
 }

@@ -15,24 +15,20 @@ class ArticleIdeasNotifier extends StateNotifier<ArticleIdeasState> {
   final ArticleIdeasRepository articleIdeaRepository;
   final TextDataExchangeRepository textDataExchangeRepository;
 
-  void onTextChanged(String newValue) {
-    state = state.copyWith(query: newValue);
-  }
-
   void toggleClickbaitFeature(bool? newValue) {
     state = state.copyWith(
       seoEnabled: newValue,
     );
-
-    fetchArticleIdeas();
   }
 
-  void fetchArticleIdeas() async {
+  void fetchArticleIdeas(String query) async {
     try {
-      state = state.copyWith(viewState: ViewState.loading);
+      state = state.copyWith(
+        viewState: ViewState.loading,
+      );
 
       final articleIdeas = await articleIdeaRepository.getArticleIdeas(
-        query: state.query ?? '',
+        query: query,
         seoEnabled: state.seoEnabled,
       );
 

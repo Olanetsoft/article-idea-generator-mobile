@@ -24,9 +24,9 @@ class ArticleIdeaItem extends ConsumerWidget {
           ),
           const SizedBox(width: 16),
           CircleAvatar(
-            backgroundColor: colorScheme.primary,
+            backgroundColor: colorScheme.onBackground.withOpacity(0.8),
             child: IconButton(
-              color: colorScheme.onPrimary,
+              color: colorScheme.background,
               onPressed: () {
                 ref
                     .read(articleIdeasNotifierProvider.notifier)
@@ -46,9 +46,9 @@ class ArticleIdeaItem extends ConsumerWidget {
           ),
           const SizedBox(width: 8),
           CircleAvatar(
-            backgroundColor: colorScheme.primary,
+            backgroundColor: colorScheme.onBackground.withOpacity(0.8),
             child: IconButton(
-              color: colorScheme.onPrimary,
+              color: colorScheme.background,
               onPressed: () => ref
                   .read(articleIdeasNotifierProvider.notifier)
                   .shareArticleIdea(articleIdea),

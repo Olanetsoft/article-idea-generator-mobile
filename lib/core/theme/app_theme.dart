@@ -69,5 +69,9 @@ abstract class AppTheme {
           borderRadius: BorderRadius.circular(32),
           borderSide: BorderSide(color: colorScheme.primary),
         ),
+        disabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(32),
+          borderSide: BorderSide(color: colorScheme.primary),
+        ),
       );
 }
