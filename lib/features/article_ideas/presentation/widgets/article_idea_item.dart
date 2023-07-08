@@ -22,6 +22,28 @@ class ArticleIdeaItem extends ConsumerWidget {
           Expanded(
             child: Text(articleIdea.title),
           ),
+          const SizedBox(width: 16),
+          CircleAvatar(
+            backgroundColor: colorScheme.primary,
+            child: IconButton(
+              color: colorScheme.onPrimary,
+              onPressed: () {
+                ref
+                    .read(articleIdeasNotifierProvider.notifier)
+                    .copyArticleIdea(articleIdea);
+
+                ScaffoldMessenger.of(context)
+                  ..hideCurrentSnackBar()
+                  ..showSnackBar(
+                    const SnackBar(
+                      behavior: SnackBarBehavior.floating,
+                      content: Text('Title copied to clipboard'),
+                    ),
+                  );
+              },
+              icon: const Icon(Icons.copy),
+            ),
+          ),
           const SizedBox(width: 8),
           CircleAvatar(
             backgroundColor: colorScheme.primary,

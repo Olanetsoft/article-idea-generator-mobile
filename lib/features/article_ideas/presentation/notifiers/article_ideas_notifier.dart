@@ -51,6 +51,10 @@ class ArticleIdeasNotifier extends StateNotifier<ArticleIdeasState> {
   void shareArticleIdea(ArticleIdea articleIdea) {
     textDataExchangeRepository.shareText(articleIdea.title);
   }
+
+  void copyArticleIdea(ArticleIdea articleIdea) {
+    textDataExchangeRepository.copyText(articleIdea.title);
+  }
 }
 
 final articleIdeasNotifierProvider =
