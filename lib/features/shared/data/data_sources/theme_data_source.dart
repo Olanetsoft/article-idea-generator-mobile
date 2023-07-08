@@ -31,8 +31,6 @@ class HiveThemeDataSource implements ThemeDataSource {
   }
 }
 
-final themeDataSourceProvider = Provider<HiveThemeDataSource>(
-  (ref) {
-    return HiveThemeDataSource(storage: GetStorage());
-  },
+final themeDataSourceProvider = Provider<ThemeDataSource>(
+  (ref) => HiveThemeDataSource(storage: GetStorage()),
 );
