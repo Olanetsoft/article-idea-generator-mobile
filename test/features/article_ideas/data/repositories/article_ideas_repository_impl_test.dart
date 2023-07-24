@@ -1,6 +1,5 @@
 import 'package:article_idea_generator/features/article_ideas/data/data_sources/article_ideas_data_source.dart';
 import 'package:article_idea_generator/features/article_ideas/data/models/article_idea.dart';
-import 'package:article_idea_generator/features/article_ideas/data/repositories/article_ideas_repository_impl.dart';
 import 'package:article_idea_generator/features/article_ideas/domain/repositories/article_ideas_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -21,13 +20,15 @@ void main() {
     setUp(() {
       articleIdeasDataSource = MockArticleIdeasDataSource();
 
-      when(() => articleIdeasDataSource.getArticleIdeas(query: 'query'))
-          .thenAnswer(
-        (_) async => articleIdeas,
-      );
+      when(
+        () => articleIdeasDataSource.getArticleIdeas(
+          query: 'query',
+          seoEnabled: false,
+        ),
+      ).thenAnswer((_) async => articleIdeas);
     });
 
-    ArticleIdeasRepository createSubject() => ArticleIdeasRepositoryImpl(
+    ArticleIdeasRepository createSubject() => ArticleIdeasRepository(
           articleIdeasDataSource: articleIdeasDataSource,
         );
 
@@ -44,16 +45,24 @@ void main() {
       test('makes correct api request', () async {
         final subject = createSubject();
 
-        expect(subject.getArticleIdeas(query: 'query'), completes);
+        expect(subject.getArticleIdeas(query: 'query', seoEnabled: false),
+            completes);
 
-        verify(() => articleIdeasDataSource.getArticleIdeas(query: 'query'))
-            .called(1);
+        verify(
+          () => articleIdeasDataSource.getArticleIdeas(
+            query: 'query',
+            seoEnabled: false,
+          ),
+        ).called(1);
       });
 
       test('returns list of article ideas', () async {
         final subject = createSubject();
 
-        final result = await subject.getArticleIdeas(query: 'query');
+        final result = await subject.getArticleIdeas(
+          query: 'query',
+          seoEnabled: false,
+        );
 
         expect(result, articleIdeas);
       });

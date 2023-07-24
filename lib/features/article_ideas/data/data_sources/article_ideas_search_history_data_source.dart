@@ -3,8 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_storage/get_storage.dart';
 
 const articleIdeasSearchKey = 'articleIdeasSearchKey';
+const articleIdeasSearchMaxResults = 20;
 
-abstract class ArticleIdeasSearchDataSource {
+abstract class ArticleIdeasSearchHistoryDataSource {
   List<ArticleIdeasSearchEntry> getSearchHistory();
 
   void addSearchEntry(ArticleIdeasSearchEntry entry);
@@ -14,13 +15,13 @@ abstract class ArticleIdeasSearchDataSource {
   List<ArticleIdeasSearchEntry> filterSearchHistory(String query);
 }
 
-class GetStorageArticleIdeasSearchDataSource
-    implements ArticleIdeasSearchDataSource {
-  GetStorageArticleIdeasSearchDataSource({
+class GetStorageArticleIdeasSearchHistoryDataSource
+    implements ArticleIdeasSearchHistoryDataSource {
+  GetStorageArticleIdeasSearchHistoryDataSource({
     required GetStorage storage,
     int? maxResults,
   })  : _storage = storage,
-        _maxResults = maxResults ?? 20;
+        _maxResults = maxResults ?? articleIdeasSearchMaxResults;
 
   final GetStorage _storage;
   final int _maxResults;
@@ -65,8 +66,8 @@ class GetStorageArticleIdeasSearchDataSource
 }
 
 final articleIdeasSearchDataSourceProvider =
-    Provider<ArticleIdeasSearchDataSource>(
-  (ref) => GetStorageArticleIdeasSearchDataSource(
+    Provider<ArticleIdeasSearchHistoryDataSource>(
+  (ref) => GetStorageArticleIdeasSearchHistoryDataSource(
     storage: GetStorage(),
   ),
 );

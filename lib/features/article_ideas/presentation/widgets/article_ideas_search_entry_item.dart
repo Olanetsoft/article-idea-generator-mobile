@@ -1,5 +1,5 @@
 import 'package:article_idea_generator/features/article_ideas/data/models/article_ideas_search_entry.dart';
-import 'package:article_idea_generator/features/article_ideas/presentation/notifiers/article_ideas_search_notifier.dart';
+import 'package:article_idea_generator/features/article_ideas/presentation/notifiers/article_ideas_search_history_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

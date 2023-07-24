@@ -1,16 +1,16 @@
 import 'package:article_idea_generator/features/article_ideas/data/models/article_ideas_search_entry.dart';
 
-class ArticleIdeasSearchState {
-  const ArticleIdeasSearchState({
+class ArticleIdeasSearchHistoryState {
+  const ArticleIdeasSearchHistoryState({
     this.articleIdeasSearchHistory = const [],
   });
 
   final List<ArticleIdeasSearchEntry> articleIdeasSearchHistory;
 
-  ArticleIdeasSearchState copyWith({
+  ArticleIdeasSearchHistoryState copyWith({
     List<ArticleIdeasSearchEntry>? articleIdeasSearchHistory,
   }) =>
-      ArticleIdeasSearchState(
+      ArticleIdeasSearchHistoryState(
         articleIdeasSearchHistory:
             articleIdeasSearchHistory ?? this.articleIdeasSearchHistory,
       );

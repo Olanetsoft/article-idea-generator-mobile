@@ -64,7 +64,7 @@ class ArticleIdeasNotifier extends StateNotifier<ArticleIdeasState> {
     socialShareRepository.shareTwitter(
       AppTexts.marketingTweets[randomIndex],
       hashtags: ['ArticleIdeaGenerator'],
-      url: 'https://www.articleideagenerator.com',
+      url: AppTexts.homepage,
     );
   }
 }
