@@ -22,9 +22,11 @@ class DioArticleIdeasDataSource implements ArticleIdeasDataSource {
     required String query,
     bool seoEnabled = false,
   }) async {
+    const apiUrl = String.fromEnvironment('apiUrl');
+
     try {
       final response = await _dio.get(
-        'https://www.articleideagenerator.com/api/request?seoEnabled=$seoEnabled',
+        '$apiUrl/request?seoEnabled=$seoEnabled',
         data: {
           'prompt': query,
         },
