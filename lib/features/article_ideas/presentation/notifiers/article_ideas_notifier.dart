@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:article_idea_generator/core/constants/app_texts.dart';
-import 'package:article_idea_generator/core/utilities/failure.dart';
+import 'package:article_idea_generator/core/utilities/failures.dart';
 import 'package:article_idea_generator/features/article_ideas/data/models/article_idea.dart';
 import 'package:article_idea_generator/features/article_ideas/domain/repositories/article_ideas_repository.dart';
 import 'package:article_idea_generator/features/article_ideas/presentation/states/article_ideas_state.dart';
