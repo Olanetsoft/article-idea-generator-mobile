@@ -1,6 +1,5 @@
 import 'package:article_idea_generator/features/article_ideas/presentation/notifiers/article_ideas_notifier.dart';
 import 'package:article_idea_generator/features/article_ideas/presentation/pages/article_ideas_search_page.dart';
-import 'package:article_idea_generator/features/article_ideas/presentation/widgets/article_ideas_search_field.dart';
 import 'package:article_idea_generator/features/article_ideas/presentation/widgets/widgets.dart';
 import 'package:article_idea_generator/features/shared/presentation/widgets/widgets.dart';
 import 'package:article_idea_generator/core/constants/app_texts.dart';

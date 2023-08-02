@@ -11,3 +11,7 @@ class Failure extends Equatable {
   @override
   List<Object?> get props => [message];
 }
+
+class GetArticleIdeasFailure extends Failure {
+  const GetArticleIdeasFailure(String message) : super(message);
+}
