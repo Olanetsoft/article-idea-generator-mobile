@@ -1,0 +1,53 @@
+name: Article Idea Generator CI
+
+permissions: write-all
+
+on:
+  push:
+    branches:
+      - 'main'
+      - 'develop'
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - ready_for_review
+    branches:
+      - 'main'
+      - 'develop'
+    paths-ignore:
+      - '**.md'
+      - '.git/'
+      - '.vscode/'
+
+  jobs:
+    analyze:
+      name: Analyze
+      if: github.event.pull_request.draft == false
+      timeout-minutes: 30
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout repository
+          uses: actions/checkout@v3
+        - name: Setup Flutter
+          uses: subosito/flutter-action@v2
+          with:
+            channel: 'stable'
+            cache: true
+
+        - name: Check metrics
+          uses: dart-code-checker/dart-code-metrics-action@v3.0.0
+          with:
+            check_unused_files: true
+            folders: 'lib, test'
+            pull_request_comment: true
+            fatal_warnings: true
+            fatal_performance: true
+            fatal_style: true
+
+        - name: Verify formatting
+          run: dart format --set-exit-if-changed
+
+        - name: Run tests
+          run: flutter test
