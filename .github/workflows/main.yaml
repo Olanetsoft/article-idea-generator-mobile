@@ -47,5 +47,5 @@ on:
         - name: Verify formatting
           run: dart format --set-exit-if-changed
 
-        - name: Run tests
+        - name: Run unit test
           run: flutter test
