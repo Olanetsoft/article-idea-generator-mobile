@@ -1,0 +1,87 @@
+name: Article Idea Generator Basic Checks
+
+env:
+  FLUTTER_VERSION: "3.16.8"
+
+on:
+  pull_request:
+    branches: ["main"]
+
+concurrency:
+  group: basic-checks-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      # https://github.com/marketplace/actions/setup-flutter-sdk
+      - name: Setup Flutter SDK
+        uses: flutter-actions/setup-flutter@v2.2
+        with:
+          channel: "stable"
+          version: $FLUTTER_VERSION
+
+      - name: Cache Flutter Packages
+        id: cache-flutter-packages
+        uses: actions/cache@v3
+        env:
+          cache-name: cache-flutter-packages
+        with:
+          path: |
+            ~/.dart_tool
+            ~/.pub-cache
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Check metrics
+        uses: dart-code-checker/dart-code-metrics-action@v3.0.0
+        with:
+          check_unused_files: true
+          folders: 'lib, test'
+          pull_request_comment: true
+          fatal_warnings: true
+          fatal_performance: true
+          fatal_style: true
+
+  unit-tests:
+    runs-on: ubuntu-latest
+    needs: lint
+    steps:
+      - uses: actions/checkout@v3
+
+      # https://github.com/marketplace/actions/setup-flutter-sdk
+      - name: Setup Flutter SDK
+        uses: flutter-actions/setup-flutter@v2.2
+        with:
+          channel: "stable"
+          version: $FLUTTER_VERSION
+
+      - name: Cache Flutter Packages
+        id: cache-flutter-packages
+        uses: actions/cache@v3
+        env:
+          cache-name: cache-flutter-packages
+        with:
+          path: |
+            ~/.dart_tool
+            ~/.pub-cache
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Run unit test
+        run: flutter test
