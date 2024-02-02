@@ -42,15 +42,8 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
-      - name: Check metrics
-        uses: dart-code-checker/dart-code-metrics-action@v3.0.0
-        with:
-          check_unused_files: true
-          folders: 'lib, test'
-          pull_request_comment: true
-          fatal_warnings: true
-          fatal_performance: true
-          fatal_style: true
+      - name: Analyze project
+        run: flutter analyze
 
   unit-tests:
     runs-on: ubuntu-latest
