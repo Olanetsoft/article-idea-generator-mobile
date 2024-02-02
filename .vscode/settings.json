@@ -5,12 +5,13 @@
     "Grotesk",
     "mocktail",
     "Olanetsoft",
+    "pubspec",
     "riverpod",
     "unfocus",
   ],
   "editor.codeActionsOnSave": {
-    "source.fixAll": true,
-    "editor.formatOnSave": true,
-    "editor.bracketPairColorization.enabled": true
+    "source.fixAll": "explicit",
+    "editor.formatOnSave": "explicit",
+    "editor.bracketPairColorization.enabled": "explicit"
   }
 }

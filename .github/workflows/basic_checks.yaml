@@ -33,7 +33,7 @@ jobs:
           path: |
             ~/.dart_tool
             ~/.pub-cache
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/pubspec.lock') }}
           restore-keys: |
             ${{ runner.os }}-build-${{ env.cache-name }}-
             ${{ runner.os }}-build-
