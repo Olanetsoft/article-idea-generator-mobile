@@ -82,6 +82,7 @@ jobs:
   build:
     name: Create Android Build
     runs-on: ubuntu-latest
+    needs: unit-tests
     steps:
       - uses: actions/checkout@v3
 
