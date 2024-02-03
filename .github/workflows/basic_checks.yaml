@@ -81,7 +81,6 @@ jobs:
 
   build:
     name: Create Android Build
-    needs: version
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
