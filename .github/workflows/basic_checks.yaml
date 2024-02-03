@@ -90,7 +90,7 @@ jobs:
           distribution: 'zulu'
           java-version: "11.x"
 
-      - uses: subosito/flutter-action@v2
+      - uses: flutter-actions/setup-flutter@v2.2
         with:
           channel: 'stable'
           flutter-version: $FLUTTER_VERSION
