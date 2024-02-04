@@ -91,10 +91,13 @@ jobs:
           distribution: 'zulu'
           java-version: "11.x"
 
-      - uses: flutter-actions/setup-flutter@v2.2
+      - uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
-          flutter-version: $FLUTTER_VERSION
+          flutter-version: '3.16.8'
+
+      - name: Show Flutter Version
+        run: flutter --version
 
       - name: Get dependencies
         run: flutter pub get
