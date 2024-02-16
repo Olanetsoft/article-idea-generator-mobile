@@ -17,7 +17,7 @@ class ArticleIdeasListView extends StatelessWidget {
       children: [
         ListView.separated(
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-          separatorBuilder: (context, index) => const Divider(),
+          separatorBuilder: (context, index) => const Divider(thickness: 0.2),
           itemCount: articleIdeas.length,
           itemBuilder: (context, index) => ArticleIdeaItem(
             articleIdea: articleIdeas[index],

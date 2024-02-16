@@ -93,7 +93,7 @@ class _ArticleIdeasPageState extends ConsumerState<ArticleIdeasPage> {
                   const Text('Enable SEO & Clickbait Feature'),
                 ],
               ),
-              const Divider(),
+              const Divider(thickness: 0.2),
               if (articleIdeasState.viewState == ViewState.loading)
                 const Expanded(
                   child: ArticleIdeasLoadingView(),
