@@ -3,6 +3,11 @@ name: Article Idea Generator Basic Checks
 env:
   FLUTTER_VERSION: "3.16.8"
 
+#on:
+#  push:
+#    tags:
+#      - '*'
+
 on:
   pull_request:
     branches: ["main"]
