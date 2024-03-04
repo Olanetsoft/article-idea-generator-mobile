@@ -14,7 +14,7 @@ class ArticleIdeasSearchHistoryListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.separated(
       keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-      separatorBuilder: (context, index) => const Divider(),
+      separatorBuilder: (context, index) => const Divider(thickness: 0.2),
       itemCount: articleIdeasSearchHistory.length,
       itemBuilder: (context, index) => ArticleIdeasSearchEntryItem(
         articleIdeasSearchEntry: articleIdeasSearchHistory[index],
