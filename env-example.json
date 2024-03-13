@@ -1,3 +1,5 @@
 {
-    "apiUrl": "https://www.example.com"
+    "apiUrl": "https://www.example.com",
+    "geminiApiKey": "AIzaSyCKC238Kdc5sAe_plBxxWZrHvgM4t__lHI",
+    "initialPrompt": "Return a 5 list of article ideas with the following rules and payload. If seoEnabled is true in the payload, make the list seo optimized. Return only the list without any title or description and without any form of numbering or formatting; just plain text."
 }
