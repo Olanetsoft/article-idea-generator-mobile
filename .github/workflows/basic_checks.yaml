@@ -3,6 +3,11 @@ name: Article Idea Generator Basic Checks
 env:
   FLUTTER_VERSION: "3.16.8"
 
+#on:
+#  push:
+#    tags:
+#      - '*'
+
 on:
   pull_request:
     branches: ["main"]
@@ -78,3 +83,63 @@ jobs:
 
       - name: Run unit test
         run: flutter test
+
+  build:
+    name: Create Android Build
+    runs-on: ubuntu-latest
+    needs: unit-tests
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: "11.x"
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          flutter-version: '3.16.8'
+
+      - name: Show Flutter Version
+        run: flutter --version
+
+      - name: Upload apk to google drive
+        run: flutter build apk
+
+      - name: Get Branch Name
+        id: branch
+        run: echo "::set-output name=branch::${GITHUB_HEAD_REF}"
+
+      - name: Get Today's Date
+        id: date
+        run: echo "::set-output name=date::$(date + '%Y-%m-%d')"
+
+      - name: Get Folder Id by condition
+        uses: haya14busa/action-cond@v1
+        id: folderId
+        with:
+          cond: ${{ steps.branch.outputs.branch == 'dev' }}
+          if_true: ${{ secrets.APKFOLDER }}
+          if_false: ${{ secrets.APKFOLDER2 }}
+
+      - name: Get dependencies
+        run: flutter pub get
+
+      - name: Start release build
+        run: flutter build apk
+
+      - name: Archive Files
+        run: |
+          sudo apt-get update
+          sudo apt-get install zip
+          zip -r archive.zip *
+
+      - name: Upload apk to Google Drive
+        uses: adityak74/google-drive-upload-git-action@main
+        with:
+          credentials: ${{ secrets.CREDENTIALS }}
+          filename: "build/app/outputs/apk/release/app-release.apk"
+          folderId: ${{ steps.folderId.outputs.value }}
+          name: ${{steps.branch.outputs.branch}}_apk_${{steps.date.outputs.date}}.apk
+          mimeType: "application/vnd.android.package-archive"
